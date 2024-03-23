@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckp5mxx2wow2n"]
+
+[ext_resource type="Texture2D" uid="uid://cxfv6c2xs85yn" path="res://debug_grey.png" id="1_oj2g1"]
+[ext_resource type="PackedScene" uid="uid://dkm1yffwaacux" path="res://player.tscn" id="2_hqnkc"]
+[ext_resource type="Texture2D" uid="uid://bhufse3q6r6vp" path="res://debug_red.png" id="2_xiby8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paby3"]
+albedo_texture = ExtResource("1_oj2g1")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g4yyc"]
+albedo_texture = ExtResource("2_xiby8")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="Environment" id="Environment_polyn"]
+background_mode = 1
+background_color = Color(0.505882, 0.580392, 0.678431, 1)
+
+[node name="Map" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("2_hqnkc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Geometry" type="Node3D" parent="."]
+
+[node name="Floor" type="CSGBox3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+use_collision = true
+size = Vector3(100, 0.5, 100)
+material = SubResource("StandardMaterial3D_paby3")
+
+[node name="Surf" type="CSGBox3D" parent="Geometry"]
+transform = Transform3D(0.694658, -0.71934, 0, 0.71934, 0.694658, 0, 0, 0, 1, 58.9, 8.6, 0)
+use_collision = true
+size = Vector3(25, 0.5, 100)
+material = SubResource("StandardMaterial3D_g4yyc")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_polyn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+directional_shadow_mode = 0
