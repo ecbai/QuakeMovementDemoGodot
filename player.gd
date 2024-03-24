@@ -21,7 +21,7 @@ extends CharacterBody3D
 ## Force applied by firing at a surface
 @export var force : float = 30.0
 
-## Force applied by firing at a surface
+## Radius of "explosion" fired at a surface
 @export var blast_radius : float = 8.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
