@@ -41,8 +41,8 @@ func _physics_process(delta):
 	# Moves the player while accounting for collision
 	move_and_slide()
 	
-	# Makes collisions with walls and surfable surfaces more in line with Source
-	if is_on_wall():
+	# Makes collisions with walls, surfable surfaces, and ceilings more in line with Source
+	if is_on_wall() || is_on_ceiling():
 		velocity = velocity.slide(get_wall_normal())
 
 # Sets the player's velocity based on their current speed and their input direciton
@@ -61,7 +61,7 @@ func velset(delta: float) -> void:
 	else:
 		# Change to Input.is_action_just_pressed("jump") to disable auto bhop
 		if Input.is_action_pressed("jump"):
-			velocity.y = jump_height
+			velocity.y += jump_height
 			horivel = move_air(delta, target, horivel)
 		else: horivel = move_ground(delta, target, horivel)
 	
